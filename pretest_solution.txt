@@ -1,6 +1,7 @@
+public class Source {
 public static void main(String[] args) {
 
-String a = "String;
+String a = "String";
 int count = 0;
 
 char[] tmp1 = a.toCharArray();
@@ -21,4 +22,5 @@ count++;
 }
 
 System.out.println("Count" + count);
+}
 }
