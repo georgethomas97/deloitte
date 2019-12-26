@@ -1,0 +1,30 @@
+create table Student_f
+ (
+    Roll varchar(10),
+    Name varchar(20),
+    Address varchar(20),
+    Marks number
+)
+ 
+insert into Student_F values('1','Tufail','Chennai',null);
+insert into Student_F values('2','Amit','Chennai',null);
+insert into Student_F values('3','Tarun','Chennai',98);
+
+select * from Student_F;
+
+SELECT TRIM('D' FROM 'HELLO WORLD') AS ACC_NO FROM DUAL;
+
+
+
+SELECT MONTHS_BETWEEN('SEP-23-2017', 'APR-24-2018') FROM DUAL
+
+CREATE TABLE EMP (EID INTEGER, ENAME VARCHAR2(20), DOB DATE, DOJ DATE)
+INSERT INTO EMP VALUES (101, 'VARUN', 'MAY-20-1990', 'FEB-24-2012')
+INSERT INTO EMP VALUES (102, 'TARUN', 'JAN-03-1988', 'APR-18-2014')
+INSERT INTO EMP VALUES (103, 'KARUN', 'DEC-14-1981', 'OCT-30-2017')
+
+
+SELECT ENAME, ROUND (MONTHS_BETWEEN(SYSDATE,DOB)/12) AS AGE FROM EMP
+
+
+SELECT ENAME, ROUND (MONTHS_BETWEEN(DOJ,DOB)/12) AS AGE FROM EMP
