@@ -1,0 +1,63 @@
+Create a table called Employee with the following Columns  and following Constrains :-
+------------------------------------------------------------------------------------------------------------
+
+Assignment 1:
+
+EmployeeID should not be duplicate
+EmployeeName should not be null
+EmployeeAddress  :- should not be Newyork, London and Paris
+Salary : should be between 20000 and 30000
+CompanyAddress should be default as ASV Suntech Park
+
+
+------insert two records
+
+create table Employee
+(
+EmployeeID integer primary key,
+Employeename varchar2(20) not null,
+EmployeeAddress varchar2(30) constraint invalid_loc check(EmployeeAddress not in('NewYork','London','Paris')),
+Salary integer constraint invalid_salary check(Salary between 20000 and 30000), CompanyAddress varchar2(30) default 'ASV Suntech Park' not null
+)
+
+insert into employee (EmployeeID, EmployeeName, EmployeeAddress, Salary)values (101, 'Varys', 'Jamaica' , 25000);
+
+Salary Table
+
+EmployeeID  :- should not be duplicate
+Employee PF  :- should not be negative
+Employee HRA :- should not be negative
+
+create table Salary
+(
+EmployeeID integer unique,
+EmployeePF Integer constraint negPF check(EmployeePF>0),
+EmployeeHRA integer constraint negHRA check(EmployeeHRA>0),
+constraint pk foreign key(EmployeeID) references Employee(EmployeeID)
+)
+
+insert into salary values (101, 2000, 1000)
+insert into salary values (102, 3000, 2000)
+
+The Salary Table must match EmployeeID.
+
+
+Assignment 2:
+
+Create a table with two columns and enforce the integrity.
+*Think what will be the required integrity to be enforced on CID , CitizenDOB and CitizenDOD
+
+Table :- Citizen
+
+Columns
+	CID
+	CitizenDOB
+	CitizenDOD ( Date of Death )
+
+create table Citizen
+(
+CID integer primary key,
+CitizenDOB date not null,
+CitizenDOD date not null,
+constraint invalid_dob check(CitizenDOB<CitizenDOD)
+)
