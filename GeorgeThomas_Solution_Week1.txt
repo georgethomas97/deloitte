@@ -1,0 +1,104 @@
+1.*Write a query which will display the customer id, account type they hold, their account number and bank name.
+
+ANS: select a.customer_id, a.account_type, b.bank_name from account_info a 
+     join bank_info b on a.ifsc_code = b.ifsc_code;
+
+2.*Write a query which will display the customer id, account type and the account number of HDFC customers who registered after 12-JAN-2012 and before 04-APR-2012.
+
+ANS: select customer_id, account_type, account_no from account_info where ifsc_code like 'HD%'
+     and registration_date between to_date('01/12/2012','mm/dd/yyyy') and to_date('04/04/2012','mm/dd/yyyy');
+
+3.*Write a query which will display the customer id, customer name, account no, account type and bank name where the customers hold the account.
+
+ANS: select p.customer_id, p.customer_name, a.account_no, a.account_type, b.bank_name from customer_personal_info p 
+     join account_info a on p.customer_id = a.customer_id 
+     join bank_info b on a.ifsc_code = b.ifsc_code;
+
+4.*Write a query which will display the customer id, customer name, gender, marital status along with the unique reference string and
+ sort the records based on customer id in descending order. <br/>
+<br/><b>Hint:  </b>Generate unique reference string as mentioned below
+:
+<br/> CustomerName_Gender_MaritalStatus
+<br/><b> Example, </b>
+<br/> C-005           KUMAR              M                 SINGLE            KUMAR_M_SINGLE
+<BR/> 
+Use ""UNIQUE_REF_STRING"" as alias name for displaying the unique reference string."
+
+ANS: select customer_id, customer_name, gender, marital_status, 
+     customer_name || '_' || gender || '_' || marital_status as UNIQUE_REF_STRING 
+     from customer_personal_info
+     order by customer_id desc;
+
+5.*Write a query which will display the account number, customer id, registration date, initial deposit amount of the customer
+ whose initial deposit amount is within the range of Rs.15000 to Rs.25000.
+
+ANS: select account_no, customer_id, registration_date, initial_deposit from account_info 
+     where initial_deposit between 15000 and 25000;
+
+6.*Write a query which will display customer id, customer name, date of birth, guardian name of the customers whose name starts with 'J'.
+
+ANS: select customer_id, customer_name, date_of_birth, guardian_name 
+     from customer_personal_info where customer_name like 'J%';
+
+7.*Write a query which will display customer id, account number and passcode. 
+<br/>
+Hint:  To generate passcode, join the last three digits of customer id and last four digit of account number.
+ 
+<br/>Example
+<br/>C-001                   1234567898765432                0015432
+<br/>Use ""PASSCODE"" as alias name for displaying the passcode."
+
+ANS: select customer_id, account_no, substr(customer_id,3,3)|| substr(account_no,13,4) as passcode from account_info;
+
+8.*Write a query which will display the customer id, customer name, date of birth, Marital Status, Gender, Guardian name, 
+contact no and email id of the customers whose gender is male 'M' and marital status is MARRIED.
+
+ANS: select customer_id, customer_name, date_of_birth, marital_status, gender, guardian_name, contact_no, mail_id 
+     from customer_personal_info where gender = 'M' and marital_status = 'MARRIED';
+
+9.*Write a query which will display the customer id, customer name, guardian name, reference account holders name of the customers 
+who are referenced / referred by their 'FRIEND'.
+
+ANS: select p.customer_id, p.customer_name, p.guardian_name, r.reference_acc_name from customer_personal_info p 
+     join customer_reference_info r on p.customer_id = r.customer_id where r.relation = 'FRIEND';
+
+10.*Write a query to display the customer id, account number and interest amount in the below format with INTEREST_AMT as alias name
+ Sort the result based on the INTEREST_AMT in ascending order.  <BR/>Example: 
+$5<BR/>Hint: Need to prefix $ to interest amount and round the result without decimals.
+
+ANS: select customer_id, account_no, '$'||round(initial_deposit*interest/100) as INTEREST_AMT from account_info;
+ 
+11.*Write a query which will display the customer id, customer name, account no, account type, activation date,
+ bank name whose account will be activated on '10-APR-2012'
+
+ANS: select p.customer_id, p.customer_name, a.account_no, a.account_type, a.activation_date, b.bank_name from customer_personal_info p 
+     join account_info a on p.customer_id = a.customer_id 
+     join bank_info b on a.ifsc_code = b.ifsc_code where activation_date = to_date('04/10/2012','mm/dd/yyyy');
+
+12.*Write a query which will display account number, customer id, customer name, bank name, branch name, ifsc code
+, citizenship, interest and initial deposit amount of all the customers.
+
+ANS: select a.account_no, p.customer_id, p.customer_name, b.bank_name, b.branch_name, b.ifsc_code, p.citizenship, a.interest, a.initial_deposit from customer_personal_info p 
+     join account_info a on p.customer_id = a.customer_id 
+     join bank_info b on a.ifsc_code = b.ifsc_code;
+
+13.*Write a query which will display customer id, customer name, date of birth, guardian name, contact number,
+ mail id and reference account holder's name of the customers who has submitted the passport as an identification document.
+
+ANS: select p.customer_id, p.customer_name, p.date_of_birth, p.guardian_name, p.contact_no, p.mail_id, r.reference_acc_name from customer_personal_info p 
+     join customer_reference_info r on p.customer_id = r.customer_id where p.identification_doc_type = 'PASSPORT';
+
+14.*Write a query to display the customer id, customer name, account number, account type, initial deposit, 
+interest who have deposited maximum amount in the bank.
+
+ANS: select p.customer_id, p.customer_name, a.account_no, a.account_type, a.initial_deposit, a.interest from customer_personal_info p 
+     join account_info a on p.customer_id = a.customer_id where a.initial_deposit >= all(select initial_deposit from account_info);
+
+15.*Write a query to display the customer id, customer name, account number, account type, interest, bank name 
+and initial deposit amount of the customers who are getting maximum interest rate.
+
+ANS: select p.customer_id, p.customer_name, a.account_no, a.account_type, a.interest, b.bank_name, a.initial_deposit from customer_personal_info p 
+     join account_info a on p.customer_id = a.customer_id 
+     join bank_info b on a.ifsc_code = b.ifsc_code where a.interest >= all(select interest from account_info);
+
+--------------------------------------------------END----------------------END----------------------------------------------------------------------
