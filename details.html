@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>"Review Details"</title>
+<script type="text/javascript" src="validate_details.js">
+	
+</script>
+</head>
+
+<body bgcolor="white">
+	<table cellspacing="10" cellpadding="10" border="2" align="center"
+		bgcolor="pink">
+		<form>
+			<tr>
+				<h1 align="center">
+					<font color="green">CUSTOMER FORM</font>
+				</h1 align="center">
+			</tr>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" name="username" id="username"></td>
+
+			</tr>
+			<tr>
+				<td>Spouse's Name:</td>
+				<td><input type="text" name="spousename" id="spousename"></td>
+			</tr>
+			<tr>
+				<td>Gender:</td>
+				<td><input type="radio" name="gender" value="Male"
+					onclick="mygender(this.value)"> Male</td>
+				<td><br /> <input type="radio" name="gender" value="Female"
+					onclick="mygender(this.value)">Female</td>
+			</tr>
+			<tr>
+				<td>Comments:</td>
+				<td><input type="radio" name="comments" value="Like"
+					onclick="mycomment(this.value)"> Like</td>
+				<br />
+				<td><input type="radio" name="comments" value="UnLike"
+					onclick="mycomment(this.value)"> Don't Like</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="Submit" onClick="validate()"></td>
+			</tr>
+			<tr>
+				<td colspan = 3><div id="errorusername"></div></td>
+			</tr>
+			<tr><td colspan = 3><div id="errorspouse"></div></td></tr>
+		</form>
+	</table>
+	<div align="center" id="name_details"></div>
+	<div align="center" id="gender_details"></div>
+	<div align="center" id="acq_gender"></div>
+	<div align="center" id="like_details"></div>
+	<div align="center" id="comment_details"></div>
+</body>
+
+</html>
