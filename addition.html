@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>Addition of two numbers</title>    
+  <script>
+  function sum()
+  {
+      var number1=document.getElementById("number1").value;
+      var number2=document.getElementById("number2").value;
+      var sum=parseInt(number1)+parseInt(number2);
+      document.getElementById("sum").value=sum;
+  }
+  </script>
+</head>
+<body>
+    <p>First Number: </p>
+    <input type="text" id="number1">
+    <p>Second Number:</p>
+    <input type="text" id="number2">
+    <p>Sum of the numbers: </p>
+    <input type="text" id="sum" onFocus="sum()">
+</body>
+</html>
