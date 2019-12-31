@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Details</title>
+<script>
+	function validation() {
+		var username = document.getElementById("username").value;
+		var spousename = document.getElementById("spousename").value;
+		usernameerror = document.getElementById("usernameerror");
+		gendererror = document.getElementById("gendererror");
+		commentserror = document.getElementById("commentserror");
+		var gender = document.getElementsByName('gender');
+		var count1 = 0;
+		var count2 = 0;
+		for (i = 0; i < gender.length; i++) {
+			if (gender[i].checked) {
+				var gen = gender[i].value;
+				count1++;
+			}
+		}
+		var comments = document.getElementsByName('comments');
+
+		for (i = 0; i < comments.length; i++) {
+			if (comments[i].checked) {
+				var com = comments[i].value;
+				count2++;
+			}
+		}
+		if (username.length == 0) {
+			usernameerror.innerHTML = "<font color = red>Please enter your user name</font>";
+		} else
+			usernameerror.innerHTML = "Your Name : " + username;
+		if (count1 == 0) {
+			gendererror.innerHTML = "<font color = red>Please select your gender.</font> ";
+		} else {
+			gendererror.innerHTML = "Your Gender is : " + gen;
+		}
+		if (count2 == 0) {
+			commentserror.innerHTML = "<font color = red>Please select a comment.</font> ";
+		} else {
+			commentserror.innerHTML = "Your comment is : " + com;
+		}
+	}
+</script>
+</head>
+<body>
+	<forms>
+	<table align="center" border="1" cellpadding="10" bgcolor="pink">
+		<tr>
+			<td>User Name :</td>
+			<td><input type="text" name="username" id="username"></td>
+		</tr>
+
+		<tr>
+			<td>Spouse Name :</td>
+			<td><input type="text" name="spousename" id="spousename"></td>
+		</tr>
+		<tr>
+			<td>Gender :</td>
+			<td><input type="radio" name="gender" value="male">Male
+
+
+				<br /> <input type="radio" name="gender" value="female">Female</td>
+
+		</tr>
+		<tr>
+			<td>Comments :</td>
+			<td><input type="radio" name="comments" value="like">Like
+
+				<br> <input type="radio" name="comments" value="dontlike">Don't
+				Like</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="button"
+				name="validate" value="validate" onclick="validation()"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="left"><div id="usernameerror">Your Name: </div></td>
+
+		</tr>
+		<tr>
+			<td colspan="2" align="left"><div id="gendererror">Your Gender is : </div></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="left"><div id="commentserror">Your comment is : </div></td>
+		</tr>
+
+
+	</table>
+
+	</forms>
+
+</body>
+</html>
